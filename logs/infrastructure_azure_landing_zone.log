@@ -1,0 +1,36 @@
+2021-10-06 13:43:00,254 - root - setup_logger - INFO - Setting the appropriate input and config file paths
+2021-10-06 13:43:00,254 - root - setup_logger - INFO - Initialising input variables
+2021-10-06 13:43:00,256 - app.terraform - open_file_path_return_json - INFO - successfully opened the file 'users.auto.tfvars.json'
+2021-10-06 13:43:00,256 - app.terraform - open_file_path_return_json - INFO - successfully converted json to dict
+2021-10-06 13:43:00,256 - app.terraform - open_user_file_return_json - INFO - number of users = 161
+2021-10-06 13:43:00,257 - app.terraform - open_file_path_return_json - INFO - successfully opened the file 'groups.auto.tfvars.json'
+2021-10-06 13:43:00,257 - app.terraform - open_file_path_return_json - INFO - successfully converted json to dict
+2021-10-06 13:43:00,257 - app.terraform - open_group_file_return_json - INFO - number of groups = 52
+2021-10-06 13:43:02,135 - app.azure - get_raw_azure_user_data - INFO - success retrieving users
+2021-10-06 13:43:02,135 - app.azure - get_azure_ad_users - INFO - obtained 157 users.
+2021-10-06 13:43:02,136 - app.compare - check_for_unmanaged_group_in_terraform_user - INFO - obtained 52 terraform group names
+2021-10-06 13:43:02,136 - app.compare - check_for_invalid_user_in_terraform_users - INFO - obtained 157 azure ad account names
+2021-10-06 13:43:02,136 - app.compare - check_for_invalid_user_in_terraform_users - INFO - obtained 161 terraform usernames
+2021-10-06 13:43:02,136 - app.compare - validate_success_criteria - ERROR - Group Validation Failed
+2021-10-06 13:43:02,136 - app.compare - validate_success_criteria - ERROR - unmanaged group name 'random-group'
+2021-10-06 13:43:02,136 - app.compare - validate_success_criteria - ERROR - Validation_Exit_Code=1
+2021-10-06 13:46:26,204 - root - setup_logger - INFO - Setting the appropriate input and config file paths
+2021-10-06 13:46:26,204 - root - setup_logger - INFO - Initialising input variables
+2021-10-06 13:46:26,206 - app.terraform - open_file_path_return_json - INFO - successfully opened the file 'users.auto.tfvars.json'
+2021-10-06 13:46:26,207 - app.terraform - open_file_path_return_json - INFO - successfully converted json to dict
+2021-10-06 13:46:26,207 - app.terraform - open_user_file_return_json - INFO - number of users = 161
+2021-10-06 13:46:26,207 - app.terraform - open_file_path_return_json - INFO - successfully opened the file 'groups.auto.tfvars.json'
+2021-10-06 13:46:26,207 - app.terraform - open_file_path_return_json - INFO - successfully converted json to dict
+2021-10-06 13:46:26,207 - app.terraform - open_group_file_return_json - INFO - number of groups = 52
+2021-10-06 13:46:28,121 - app.azure - get_raw_azure_user_data - INFO - success retrieving users
+2021-10-06 13:46:28,121 - app.azure - get_azure_ad_users - INFO - obtained 157 users.
+2021-10-06 13:46:28,121 - app.compare - check_for_unmanaged_group_in_terraform_user - INFO - obtained 52 terraform group names
+2021-10-06 13:46:28,121 - app.compare - check_for_invalid_user_in_terraform_users - INFO - obtained 157 azure ad account names
+2021-10-06 13:46:28,122 - app.compare - check_for_invalid_user_in_terraform_users - INFO - obtained 161 terraform usernames
+2021-10-06 13:46:28,122 - app.compare - validate_success_criteria - INFO - Group Validation Successful
+2021-10-06 13:46:28,122 - app.compare - validate_success_criteria - INFO - Validation_Exit_Code=0
+2021-10-06 13:46:28,122 - app.compare - validate_success_criteria - ERROR - User Validation Failed
+2021-10-06 13:46:28,122 - app.compare - validate_success_criteria - ERROR - invalid user 1LStestuser
+2021-10-06 13:46:28,123 - app.compare - validate_success_criteria - ERROR - invalid user 2LSTestAdmin
+2021-10-06 13:46:28,123 - app.compare - validate_success_criteria - ERROR - invalid user ysheikh123-admin
+2021-10-06 13:46:28,123 - app.compare - validate_success_criteria - ERROR - invalid user ysheikh456-admin

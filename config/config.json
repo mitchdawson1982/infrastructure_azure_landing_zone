@@ -1,0 +1,7 @@
+{
+  "terraform_self_service_user_dicts_path" : "users.auto.tfvars.json",
+  "terraform_managed_groups_dicts_path" : "groups.auto.tfvars.json",
+  "azure_user_list_path" : "azure_user_list.json",
+  "get_azure_users_cli_commands" : ["az", "ad", "user", "list", "--query", "[*][userPrincipalName, displayName, objectId, accountEnabled]", "-o", "json"]
+
+}

@@ -1,0 +1,7 @@
+# Azure CLI Login
+az login --allow-no-subscriptions
+
+Commands:
+az ad user list --query "[*][userPrincipalName, displayName, objectId, accountEnabled]" -o json
+
+
