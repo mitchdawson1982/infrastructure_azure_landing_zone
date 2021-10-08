@@ -4,9 +4,10 @@ logger = logging.getLogger(__name__)
 
 class Compare:
     """
-    Class to carry out comparisons between the Azure and terraform objects data.
+    Class to carry out comparisons between the Azure and terraform data objects, to validate the
+    presence of users and groups in either source.
     """
-    def __init__(self, terraform, azure):
+    def __init__(self, terraform, azure) -> None:
         # Create the class attribute to hold the terraform class instance.
         self.terraform = terraform
         # Create the class attribute to hold the Azure class instance.
@@ -20,7 +21,12 @@ class Compare:
         # Variable for user validation success.
         self.terraform_user_validation_success = False
 
-    def check_for_unmanaged_group_in_terraform_user(self):
+    def check_for_unmanaged_group_in_terraform_user(self) -> None:
+        """
+        Method checks the groups associated with terraform users and their
+         manually added group name values against valid terraform groups.
+        :return:
+        """
         # Obtain a list of terraform group names from the terraform.get_terraform_group_names() method.
         terraform_group_names = self.terraform.get_group_names()
         logger.info(f"obtained {len(terraform_group_names)} terraform group names")
@@ -43,7 +49,7 @@ class Compare:
     def check_for_invalid_user_in_terraform_users(self):
         """
         Method will check the validity of users found in terraform users
-        against valid entries in Azure users.
+        against valid entries in Azure AD.
         """
         # Obtain a list of azure ad user account names.
         azure_ad_account_names = self.azure.get_ad_user_account_names()
@@ -51,29 +57,25 @@ class Compare:
         # Obtain a list of terraform user account names.
         terraform_user_names = self.terraform.get_user_names()
         logger.info(f"obtained {len(terraform_user_names)} terraform usernames")
-        # Create a list of users found in terraform that are not found in azure ad.
+        # Update our list of users found in terraform that are not found in azure ad.
         self.terraform_users_not_in_azure_active_directory = [
             terraform_user_name for terraform_user_name in terraform_user_names
             if terraform_user_name not in azure_ad_account_names
         ]
 
-    def check_contents_of_unmanaged_groups_in_terraform(self):
+    def check_contents_of_unmanaged_groups_in_terraform(self) -> None:
         # Check for an empty list.
         if not self.unmanaged_groups_in_terraform:
             # Set the terraform_group_validation_success variable to True.
             self.terraform_group_validation_success = True
-            # return
-            return
 
-    def check_contents_of_terraform_users_not_in_azure_active_directory(self):
+    def check_contents_of_terraform_users_not_in_azure_active_directory(self) -> None:
         # Check for an empty list.
         if not self.terraform_users_not_in_azure_active_directory:
             # Set the terraform_user_validation_success variable to True.
             self.terraform_user_validation_success = True
-            # return
-            return
 
-    def validate_success_criteria(self):
+    def validate_success_criteria(self) -> None:
         # Evaluate the status of the group validation.
         if not self.terraform_group_validation_success:
             # Log validation failed
@@ -103,20 +105,4 @@ class Compare:
             return
         # Log user validation successful.
         logger.info("User Validation Successful")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

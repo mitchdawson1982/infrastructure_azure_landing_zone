@@ -5,9 +5,14 @@ logger = logging.getLogger(__name__)
 
 class Terraform:
     """
-    Class to open and compare the users and groups terraform files.
+    Class to open and compare the users and groups from terraform users and group files.
     """
-    def __init__(self, terraform_self_service_user_dicts_path, terraform_managed_groups_dicts_path):
+    def __init__(
+            self,
+            terraform_self_service_user_dicts_path: str,
+            terraform_managed_groups_dicts_path: str
+    ) -> None:
+
         # Create the class attribute for the user list path.
         self.users_path = terraform_self_service_user_dicts_path
         # Create the class attribute for the group list path.
@@ -18,11 +23,13 @@ class Terraform:
         self.groups_json = self.open_group_file_return_json()
 
     @staticmethod
-    def open_file_path_return_json(file_path):
+    def open_file_path_return_json(file_path: str) -> dict:
         """
         Method to open and return a file based on the given file path.
-        :param file_path:
-        :return: dict
+        :Args
+            file_path (str): The path to the given file.
+        Return:
+            file_json (dict): The dictionary representation of the json string input file.
         """
         try:
             # Open the file object
@@ -36,35 +43,34 @@ class Terraform:
 
         except Exception as e:
             logger.exception(f"exception occurred {str(e)}")
-            return
 
         else:
             # Return the file object.
             return file_json
 
-    def open_user_file_return_json(self):
+    def open_user_file_return_json(self) -> dict:
         # Obtain the raw user dictionary data (dictionary of dictionaries)
         raw_user_data = self.open_file_path_return_json(self.users_path)
         logger.info(f"number of users = {len(raw_user_data.get('users'))}")
         # Return all users beneath the 'users' key.
         return raw_user_data.get('users')
 
-    def open_group_file_return_json(self):
+    def open_group_file_return_json(self) -> dict:
         # Obtain the raw groups dictionary data (dictionary of dictionaries)
         raw_group_data = self.open_file_path_return_json(self.groups_path)
         logger.info(f"number of groups = {len(raw_group_data.get('groups'))}")
         # Return all groups beneath the 'groups' key.
         return raw_group_data.get('groups')
 
-    def get_group_names(self):
+    def get_group_names(self) -> list:
         """
         Method returns a list of Terraform group names based on the
         groups dictionary data.
         """
         return list(self.groups_json)
 
-    def get_user_names(self):
-        """:var
+    def get_user_names(self) -> list:
+        """
         Method returns a list of terraform user names by calling list() on
         the stored terraform user data dictionary of dictionaries where the key is the key
         required user name.

@@ -4,7 +4,6 @@ from app.terraform import Terraform
 from app.azure import Azure
 from app.compare import Compare
 from app.create_logger import setup_logger
-import sys
 
 
 def main():

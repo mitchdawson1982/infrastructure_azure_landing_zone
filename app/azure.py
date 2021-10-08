@@ -1,10 +1,8 @@
-import logging
-
-logger = logging.getLogger(__name__)
-
 import json
 import subprocess
 import sys
+import logging
+logger = logging.getLogger(__name__)
 
 
 class Azure:
@@ -12,13 +10,13 @@ class Azure:
     A class to interact with MS Azure held users and groups.
     """
 
-    def __init__(self, get_azure_users_cli_commands):
+    def __init__(self, get_azure_users_cli_commands: str) -> None:
         # Create the class attribute for the Azure Cli Commands to obtain the users.
         self.get_users_azure_cli_commands = get_azure_users_cli_commands
         # Create the class attribute to store the formatted azure ad user data.
         self.azure_ad_users = self.get_azure_ad_users()
 
-    def get_azure_ad_users(self):
+    def get_azure_ad_users(self) -> dict:
         """:
         Method combines the calls to obtain and format the raw user data
         from Azure AD using the azure cli tools
@@ -29,7 +27,7 @@ class Azure:
         # return the formatted user data.
         return self.format_raw_azure_user_data(raw_azure_user_data)
 
-    def get_raw_azure_user_data(self):
+    def get_raw_azure_user_data(self) -> list[list]:
         """
         Method obtains users from Azure using the Azure Cli Tools via subprocess.
         Data is returned as a list of lists.
@@ -52,11 +50,10 @@ class Azure:
 
         except Exception as e:
             logger.exception(f"exception occurred {str(e)}")
-            return
 
     @staticmethod
-    def format_raw_azure_user_data(raw_azure_user_data):
-        # Create a empty user dictionary to hold our users and objects.
+    def format_raw_azure_user_data(raw_azure_user_data: list[list]) -> dict:
+        # Create a empty user dictionary to hold our users objects.
         azure_ad_users = dict()
         # Iterate through the raw user data.
         for user in raw_azure_user_data:
@@ -77,7 +74,7 @@ class Azure:
         # Return the populated dictionary.
         return azure_ad_users
 
-    def get_ad_user_account_names(self):
+    def get_ad_user_account_names(self) -> list:
         """
         Method returns a list of AD account names by calling list()
         on the stored azure_ad_users dictionary of dictionaries, where the key is
